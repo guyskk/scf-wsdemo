@@ -1,23 +1,3 @@
-"""
-安装依赖
-pip install falcon gunicorn uvicorn websockets
-
-启动服务
-gunicorn \
-    --bind=0.0.0.0:9000 \
-    --worker-class=uvicorn.workers.UvicornWorker \
-    --workers=1 \
-    --timeout=300 \
-    --keep-alive=7200 \
-    --forwarded-allow-ips='*' \
-    --access-logfile=- \
-    --error-logfile=- \
-    --log-level=info \
-    wsdemo:application
-
-发送请求
-websocat -vvv 'ws://127.0.0.1:9000/ws/demo?total=100'
-"""
 import asyncio
 import concurrent.futures
 import faulthandler
@@ -71,7 +51,7 @@ class DemoStreamResource:
         LOG.info('wsdemo accepted')
         for i in range(total):
             time.sleep(1)
-            text = f'wsdemo n={i}'
+            text = f'wsdemo文字 n={i}'
             LOG.info(text)
             self._run_coroutine(ws.send_text(text), loop=loop)
         self._run_coroutine(ws.close(), loop=loop)
