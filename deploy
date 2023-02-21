@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+# shellcheck disable=SC2068
+ezfaas deploy-tencent \
+    --region ap-guangzhou \
+    --function wsdemo \
+    --repository ccr.ccs.tencentyun.com/ezfuns/wsdemo \
+    $@
